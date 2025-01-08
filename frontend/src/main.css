@@ -1,0 +1,25 @@
+:root {
+    --blue: #4D94FF;
+    --red: #FF4D4D;
+    --light-green: #4ED77C;
+    --dark-green: #42AE66;
+    --unactive-color: #939393;
+    --call-to-action-color: linear-gradient(to right, #FFA726, #FFEB3B);
+    --foreground-color: white;
+
+    --dark-bg: #2C2C2C;
+    --light-bg: #F2F2F2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Lilita One", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--dark-bg);
+}

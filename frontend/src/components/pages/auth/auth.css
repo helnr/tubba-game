@@ -1,0 +1,38 @@
+.auth {
+    width: 300px;
+    min-height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+.auth .auth-btn {
+    display: block;
+    background-color: var(--red);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    border: none;
+    font-family: inherit;
+}
+
+.auth .auth-btn.active {
+    scale: 1.2;
+}
+
+.auth .view {
+    background-color: var(--red);
+    padding: 10px;
+    border-radius: 5px;
+}

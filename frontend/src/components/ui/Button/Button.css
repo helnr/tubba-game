@@ -1,0 +1,16 @@
+.main-btn {
+    padding: 10px 20px;
+    background: var(--call-to-action-color);
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.main-btn:hover,
+.main-btn:focus {
+    box-shadow: 0 0 10px rgba(255, 255, 255, .5);
+}
