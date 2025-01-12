@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import Auth from "./components/pages/auth";
 import Home from "./components/pages/home";
 import "./App.css";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "./services/redux/slices/authSlice";

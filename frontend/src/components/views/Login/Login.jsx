@@ -4,7 +4,8 @@ import TextField from "../../ui/TextField";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import store from "../../../services/redux/store";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { login } from "../../../services/redux/slices/authSlice";
 
 const loginSchema = z.object({
@@ -17,6 +18,7 @@ const loginSchema = z.object({
 import "./Login.css";
 
 export default function Login(props) {
+	const dispatch = useDispatch();
 	const {
 		register,
 		handleSubmit,
@@ -29,7 +31,7 @@ export default function Login(props) {
 	const onSubmit = async (data) => {
 		try {
 			data.email = data.email.toLowerCase();
-			store.dispatch(login(data));
+			dispatch(login(data));
 		} catch (error) {
 			setError("root", { message: error.message });
 		}
@@ -52,9 +54,9 @@ export default function Login(props) {
 			/>
 			{errors.password && <p>{errors.password.message}</p>}
 			<Button value="Login" />
-			{isSubmitting && <p>Welcome Back...</p>}
 			{errors.root && <p>{errors.root.message}</p>}
-			{props.error && <p>{props.error}</p>}
+			{props.status && <p>{props.status}</p>}
+			{isSubmitting && <p>Loading...</p>}
 		</Form>
 	);
 }

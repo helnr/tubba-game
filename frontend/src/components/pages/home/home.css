@@ -12,3 +12,19 @@ body {
     align-items: stretch;
     row-gap: 10px;
 }
+
+.home .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.home .user-info h2 {
+    text-align: center;
+    background: var(--call-to-action-color);
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    font-size: 28px;
+}

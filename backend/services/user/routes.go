@@ -2,6 +2,7 @@ package user
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -59,6 +60,8 @@ func (h *handler) Register(c *fiber.Ctx) error {
 		return utils.WriteInternalServerError(c)
 	}
 
+
+	payload.Email = strings.ToLower(payload.Email)
 
 
 	_, err = h.userStore.GetUserByEmail(payload.Email)
@@ -136,6 +139,7 @@ func (h *handler) Login(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status": "ok",
+		"data": user,
 	})
 }
 

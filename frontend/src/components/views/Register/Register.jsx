@@ -2,8 +2,11 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import TextField from "../../ui/TextField";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import z from "zod";
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { setLoggedIn } from "../../../services/redux/slices/authSlice";
 
 import "./Register.css";
 
@@ -16,6 +19,8 @@ const registerSchema = z.object({
 });
 
 export default function Register() {
+	const dispatch = useDispatch();
+
 	const {
 		register,
 		handleSubmit,
@@ -27,11 +32,22 @@ export default function Register() {
 
 	const onSubmit = async (data) => {
 		try {
-			console.log(data);
-			await new Promise((r) => setTimeout(r, 2000));
-			throw new Error("Something went wrong");
+			const apiURL = import.meta.env.VITE_API_URL;
+			const response = await axios.post(`${apiURL}/auth/register`, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			});
+
+			if (response.status === 201) {
+				const data = await response.data;
+				if (data.status === "success") {
+					dispatch(setLoggedIn(data.data));
+				}
+			}
 		} catch (error) {
-			setError("root", { message: error.message });
+			setError("root", { message: error.response.data.error });
 		}
 	};
 
@@ -53,8 +69,8 @@ export default function Register() {
 			/>
 			{errors.password && <p>{errors.password.message}</p>}
 			<Button value="Register" />
-			{isSubmitting && <p>Sending Request...</p>}
-			{errors.root && <p>{errors.root.message}</p>}
+			{isSubmitting && <p>Registreing...</p>}
+			{errors.root && <p>Error: {errors.root.message}</p>}
 		</Form>
 	);
 }
