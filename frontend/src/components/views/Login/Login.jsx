@@ -16,7 +16,7 @@ const loginSchema = z.object({
 
 import "./Login.css";
 
-export default function Login() {
+export default function Login(props) {
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +28,7 @@ export default function Login() {
 
 	const onSubmit = async (data) => {
 		try {
-			await new Promise((r) => setTimeout(r, 2000));
+			data.email = data.email.toLowerCase();
 			store.dispatch(login(data));
 		} catch (error) {
 			setError("root", { message: error.message });
@@ -54,6 +54,7 @@ export default function Login() {
 			<Button value="Login" />
 			{isSubmitting && <p>Welcome Back...</p>}
 			{errors.root && <p>{errors.root.message}</p>}
+			{props.error && <p>{props.error}</p>}
 		</Form>
 	);
 }

@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 
 export function Auth() {
 	const {
-		auth: { loggedIn },
+		auth: { loggedIn, error },
 		loading,
 	} = useAuth();
 	const [view, setView] = useState("login");
@@ -41,7 +41,9 @@ export function Auth() {
 					</button>
 				</li>
 			</ul>
-			<div className="view">{view === "login" ? <Login /> : <Register />}</div>
+			<div className="view">
+				{view === "login" ? <Login error={error} /> : <Register />}
+			</div>
 		</div>
 	);
 }
