@@ -35,6 +35,10 @@ func WriteBadRequestError(c *fiber.Ctx, err error) error {
 	return WriteError(c, fiber.StatusBadRequest, err)
 }
 
+func WriteNotFoundError(c *fiber.Ctx, err error) error {
+	return WriteError(c, fiber.StatusNotFound, err)
+}
+
 func WriteUnauthorizedError(c *fiber.Ctx) error {
 	return WriteError(c, fiber.StatusUnauthorized, fmt.Errorf("Unauthorized"))
 }

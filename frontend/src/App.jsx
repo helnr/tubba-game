@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import Auth from "./components/pages/auth";
 import Home from "./components/pages/home";
+import Game from "./components/pages/game";
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -38,6 +39,7 @@ export default function App() {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/auth" element={<Auth />} />
+			<Route path="/game" element={<Game />} />
 			<Route path="*" element={<Home />} />
 		</Routes>
 	);

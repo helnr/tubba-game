@@ -1,0 +1,40 @@
+.card {
+    aspect-ratio: 6/8;
+    background: var(--dark-green);
+    padding: 2%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.card .inner {
+    background: var(--light-green);
+    height: 100%;
+    border-radius: 5px;
+    border: 5px solid white;
+    position: relative;
+}
+
+.card .inner span {
+    position: absolute;
+    color: var(--foreground-color);
+    font-size: 2em;
+}
+
+.card .inner span:nth-child(1) {
+    top: 2px;
+    left: 2px;
+}
+
+.card .inner span:nth-child(2) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+
+}
+
+.card .inner span:nth-child(3) {
+    bottom: 2px;
+    right: 2px;
+}

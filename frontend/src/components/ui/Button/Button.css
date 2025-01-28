@@ -10,7 +10,12 @@
     cursor: pointer;
 }
 
-.main-btn:hover,
-.main-btn:focus {
+.main-btn:not(.disabled):hover,
+.main-btn:not(.disabled):focus {
     box-shadow: 0 0 10px rgba(255, 255, 255, .5);
+}
+
+.main-btn.disabled {
+    background: var(--unactive-color);
+    cursor: not-allowed;
 }
