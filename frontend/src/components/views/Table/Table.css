@@ -1,20 +1,30 @@
 .table {
     position: relative;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table .info {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--foreground-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .table .card {
     position: absolute;
 }
 
-.table .card:nth-child(1) {
-    width: 70px;
+.table .circle-button {
+    position: absolute;
     top: 0;
     left: 0;
-    font-size: 8px;
 }
 
-.table .card:nth-child(2) {
+.table .card.table-card {
     width: 130px;
     top: 50%;
     left: 50%;

@@ -1,0 +1,65 @@
+.game-end {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+
+.game-end .game-data p {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+
+.game-end .game-data .cards {
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
+}
+
+
+.game-end .team,
+.game-end .game-data {
+    width: 320px;
+    padding: 10px;
+    display: grid;
+    row-gap: 10px;
+    border-radius: 10px;
+}
+
+.game-end .team h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.game-end .team.win {
+    background-color: var(--dark-green);
+}
+
+.game-end .team.lose {
+    background-color: var(--red);
+}
+
+.game-end .team .player {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: var(--dark-green);
+}
+
+.game-end .team .player p {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.game-end .team.win .player {
+    color: var(--dark-green);
+}
+
+.game-end .team.lose .player {
+    color: var(--red);
+}

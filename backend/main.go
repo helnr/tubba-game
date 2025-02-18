@@ -16,9 +16,10 @@ import (
 )
 
 func main() {
+	dbConnectionString := fmt.Sprintf( "mongodb+srv://%s:%s@cluster0.dge2o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", config.Env.DBUser, config.Env.DBPass)
 	client := db.NewMongoClient(
 		options.
-		Client().ApplyURI(fmt.Sprintf("mongodb://%s:%s", config.Env.DBHost, config.Env.DBPort)))
+		Client().ApplyURI(dbConnectionString))
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -42,7 +43,7 @@ func main() {
 	userService := user.NewHandler(userStore)
 	userService.RegisterRoutes(fiber)
 
-	gameStore := game.NewMongoGameStore(database)
+	gameStore := game.NewGamesStore()
 	gameService := game.NewGameHandler(userStore, gameStore)
 	gameService.RegisterRoutes(fiber)
 

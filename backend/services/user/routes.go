@@ -100,11 +100,6 @@ func (h *handler) Register(c *fiber.Ctx) error {
 
 func (h *handler) Login(c *fiber.Ctx) error {
 
-	cookie := c.Cookies("session_id")
-	if cookie != "" {
-		return utils.WriteError(c, fiber.StatusUnauthorized, fmt.Errorf("User already logged in"))
-	}
-
 	var payload types.UserLoginPayload
 
 	if err := c.BodyParser(&payload); err != nil {

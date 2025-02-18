@@ -1,6 +1,9 @@
 .card {
+    --card-color: var(--dark-green);
+    --inner-color: var(--light-green);
+
     aspect-ratio: 6/8;
-    background: var(--dark-green);
+    background: var(--card-color);
     padding: 2%;
     border-radius: 5px;
     border: none;
@@ -8,7 +11,7 @@
 }
 
 .card .inner {
-    background: var(--light-green);
+    background: var(--inner-color);
     height: 100%;
     border-radius: 5px;
     border: 5px solid white;

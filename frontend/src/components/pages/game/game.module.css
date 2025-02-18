@@ -1,0 +1,36 @@
+.game {
+    width: 300px;
+    min-height: 100vh;
+    margin: auto auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    row-gap: 10px;
+}
+
+.game.ready {
+    grid-template-rows: 1fr 2fr 1fr auto;
+}
+
+
+.game .view {
+    width: 100%;
+}
+
+.game .team {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 10px;
+}
+
+.game .team .player {
+    background: var(--dark-green);
+}
+
+.game .team.one .player {
+    background-color: var(--blue);
+}
+
+.game .team.two .player {
+    background-color: var(--red);
+}

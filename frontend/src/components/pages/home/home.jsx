@@ -73,7 +73,7 @@ export function Home() {
 
 			{view === "join" ? (
 				<div className="view">
-					<JoinGame onMenu={onMenu} />
+					<JoinGame onMenu={onMenu} user={user} />
 				</div>
 			) : view === "create" ? (
 				<div>create</div>

@@ -2,17 +2,23 @@ import "./Card.css";
 import PropTypes from "prop-types";
 
 export default function Card(props) {
-	const cardSymbol = props.symbol;
+	const card = props.cardInfo;
+	const sendEventFunc = props.sendEventFunc;
 
 	const cl = () => {
-		console.log(cardSymbol);
+		if (sendEventFunc) {
+			sendEventFunc(card);
+		}
 	};
 	return (
-		<button onClick={cl} className="card" style={props.style}>
+		<button
+			onClick={cl}
+			className={`card ${props.className ? props.className : ""}`}
+			style={props.style}>
 			<div className="inner">
-				<span>{cardSymbol}</span>
-				<span>{cardSymbol}</span>
-				<span>{cardSymbol}</span>
+				<span>{card?.value}</span>
+				<span>{card?.value}</span>
+				<span>{card?.value}</span>
 			</div>
 		</button>
 	);
@@ -20,5 +26,10 @@ export default function Card(props) {
 
 Card.propTypes = {
 	style: PropTypes.object,
-	symbol: PropTypes.string,
+	className: PropTypes.string,
+	cardInfo: PropTypes.shape({
+		value: PropTypes.string,
+		color: PropTypes.string,
+	}),
+	sendEventFunc: PropTypes.func,
 };
