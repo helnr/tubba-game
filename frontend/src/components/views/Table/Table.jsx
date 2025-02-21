@@ -7,7 +7,6 @@ export default function Table(props) {
 	const current_card = props?.currentCard;
 	const sendTubbahEvent = props?.tubbaEventFunc;
 
-	console.log(current_card);
 	return (
 		<div className="table">
 			<CircleButton onClick={sendTubbahEvent} width={50}></CircleButton>

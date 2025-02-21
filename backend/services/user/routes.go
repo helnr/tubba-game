@@ -24,12 +24,12 @@ func NewHandler(userStore types.UserStore) *handler {
 	}
 }
 
-func (h *handler) RegisterRoutes(fiber *fiber.App) {
-	auth := fiber.Group("/auth")
+func (h *handler) RegisterRoutes(app fiber.Router) {
+	auth := app.Group("/auth")
 	auth.Post("/register", h.Register)
 	auth.Post("/login", h.Login)
 
-	user := fiber.Group("/user")
+	user := app.Group("/user")
 	user.Use(middlewares.AuthMiddleware(h.userStore))
 	user.Get("/me", h.GetMe)
 	user.Post("/logout", h.Logout)

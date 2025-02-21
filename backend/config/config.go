@@ -28,6 +28,8 @@ type config struct {
 	DBName string `json:"db_name"`
 	DBUser string `json:"db_user"`
 	DBPass string `json:"db_pass"`
+
+	GOEnv string `json:"go_env"`
 }
 
 type validatorStruct struct {
@@ -45,6 +47,8 @@ func NewConfig() *config {
 		DBName: getEnv("DB_NAME", "tubba"),
 		DBUser: getEnv("DB_USER", ""),
 		DBPass: getEnv("DB_PASS", ""),
+
+		GOEnv: getEnv("GO_ENV", "development"),
 	}
 }
 

@@ -51,11 +51,11 @@ func (h *GameHandler) setupEventHandlers() {
 	h.handlers[types.TubbaEvent] = HandleTubbasEvent
 }
 
-func (h *GameHandler) RegisterRoutes(fiber *fiber.App) {
-	fiber.Post("/game", middlewares.AuthMiddleware(h.userStore), h.CreateGame)
-	fiber.Get("/game/:id", middlewares.AuthMiddleware(h.userStore), h.GetGame)
+func (h *GameHandler) RegisterRoutes(app fiber.Router) {
+	app.Post("/game", middlewares.AuthMiddleware(h.userStore), h.CreateGame)
+	app.Get("/game/:id", middlewares.AuthMiddleware(h.userStore), h.GetGame)
 
-	fiber.Get("/game/join/:id", middlewares.AuthMiddleware(h.userStore), middlewares.WebsocketMiddleware(h.games), websocket.New(h.JoinGame))
+	app.Get("/game/join/:id", middlewares.AuthMiddleware(h.userStore), middlewares.WebsocketMiddleware(h.games), websocket.New(h.JoinGame))
 }
 
 func (h *GameHandler) RouteEvent(event types.EventMessage, player *types.Player) error {

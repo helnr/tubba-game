@@ -33,7 +33,6 @@ export default function JoinGame(props) {
 
 			if (response.status === 200) {
 				const gameData = await response.data.game;
-				console.log(gameData);
 				navigate("/game", { state: { game: gameData, user: props.user } });
 			}
 		} catch (error) {

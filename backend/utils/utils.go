@@ -2,11 +2,22 @@ package utils
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/helnr/tubba-game/backend/config"
 )
+
+func LogIfDevelopment(msg string) {
+	if config.Env.GOEnv == "development" {
+		log.Println(msg)
+	}
+}
+
+func LogErrorIfDevlopment(err error) {
+	LogIfDevelopment(err.Error())
+}
 
 func WriteError(c *fiber.Ctx, code int, err error) error {
 	return c.Status(code).JSON(fiber.Map{

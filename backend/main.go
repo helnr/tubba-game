@@ -16,10 +16,11 @@ import (
 )
 
 func main() {
-	dbConnectionString := fmt.Sprintf( "mongodb+srv://%s:%s@cluster0.dge2o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", config.Env.DBUser, config.Env.DBPass)
-	client := db.NewMongoClient(
-		options.
-		Client().ApplyURI(dbConnectionString))
+	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
+	dbConnectionString := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.dge2o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", config.Env.DBUser, config.Env.DBPass)
+	opts := options.Client().ApplyURI(dbConnectionString).SetServerAPIOptions(serverAPI)
+
+	client := db.NewMongoClient(opts)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -32,21 +33,33 @@ func main() {
 
 	database := db.NewMongoDatabase(client, "tubba")
 
-	fiber := fiber.New()
-	fiber.Use(cors.New(cors.Config{
+	app := fiber.New()
+
+	app.Use(cors.New(cors.Config{
 		AllowOrigins: "http://localhost:5173",
 		AllowHeaders: "Origin, Content-Type, Accept",
 		AllowCredentials: true,
 	}))
 
+	
+
+	api := app.Group("/api")
 	userStore := user.NewUserStore(database)
 	userService := user.NewHandler(userStore)
-	userService.RegisterRoutes(fiber)
+	userService.RegisterRoutes(api)
 
 	gameStore := game.NewGamesStore()
 	gameService := game.NewGameHandler(userStore, gameStore)
-	gameService.RegisterRoutes(fiber)
+	gameService.RegisterRoutes(api)
 
-	fiber.Listen(fmt.Sprintf(":%s", config.Env.ServerPort))
+
+	if config.Env.GOEnv == "production" {
+		app.Static("/", "./dist")
+		app.Get("/*", func(c *fiber.Ctx) error {
+			return c.SendFile("./dist/index.html")
+		})
+	}
+	
+	app.Listen(fmt.Sprintf(":%s", config.Env.ServerPort))
 
 }

@@ -57,19 +57,15 @@ export default function Game() {
 	}
 
 	const { sendJsonMessage, lastMessage } = useWebSocket(
-		`ws://localhost:8080/game/join/${game.id}`,
+		`ws://localhost:8080/api/game/join/${game.id}`,
 		{
 			share: true,
 			shouldReconnect: () => {
 				return true;
 			},
 			reconnectAttempts: 3,
-			onError: (error) => {
-				console.log(error);
-			},
 			onOpen: () => {
 				sendJsonMessage(newEvent(EventMessageTypes.JoinEvent, {}));
-				console.log("Connected");
 			},
 			onClose: () => {},
 		}
@@ -91,8 +87,6 @@ export default function Game() {
 			window.removeEventListener("popstate", leave);
 		};
 	}, [sendJsonMessage, newEvent]);
-
-	console.log(gameData);
 
 	function sendCardEvent(card) {
 		sendJsonMessage(
@@ -126,15 +120,12 @@ export default function Game() {
 	const handleEvent = useCallback(
 		(event, payload) => {
 			if (event === EventMessageTypes.GameEvent) {
-				console.log(payload);
 				setGameData(payload);
 			} else if (event === EventMessageTypes.ErrorEvent) {
 				alert(payload.error);
 				if (payload.type === "navigate") {
 					navigate("/");
 				}
-			} else if (event === EventMessageTypes.JoinEvent) {
-				console.log(payload);
 			}
 		},
 		[navigate]
@@ -167,9 +158,7 @@ export default function Game() {
 			case "ready":
 				return (
 					<Lobby
-						onReady={() => {
-							console.log("Ready");
-						}}
+						onReady={() => {}}
 						gameCode={game.id}
 						status={gameData.status}
 						players={gameData.players}

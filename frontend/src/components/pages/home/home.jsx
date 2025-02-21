@@ -42,12 +42,10 @@ export function Home() {
 				);
 				if (response.status === 201) {
 					const gameData = await response.data.game;
-					console.log(gameData);
 					navigate("/game", { state: { game: gameData, user: user } });
 				}
 			} catch (error) {
 				alert("Error creating game");
-				console.log(error);
 			}
 		};
 
@@ -56,7 +54,6 @@ export function Home() {
 
 	const onJoin = () => {
 		setView("join");
-		// console.log("Join Game!");
 	};
 
 	const onMenu = () => {

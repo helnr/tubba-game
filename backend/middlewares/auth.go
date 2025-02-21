@@ -1,7 +1,6 @@
 package middlewares
 
 import (
-	"log"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -16,24 +15,24 @@ func AuthMiddleware(userStore types.UserStore) fiber.Handler {
 
 		cookie := c.Cookies("session_id")
 		if cookie == "" {
-			log.Println("Cookie not found")
+			utils.LogIfDevelopment("Cookie not found")
 			return utils.WriteUnauthorizedError(c) 
 		}
 
 		userID, err := bson.ObjectIDFromHex(cookie)
 		if err != nil {
-			log.Println(err)
+			utils.LogErrorIfDevlopment(err)
 			return utils.WriteUnauthorizedError(c)
 		}
 
 		user, err := userStore.GetUserByID(primitive.ObjectID(userID))
 		if err != nil {
-			log.Println(err)
+			utils.LogErrorIfDevlopment(err)
 			return utils.WriteUnauthorizedError(c)
 		}
 		
 		if user.Session.ExpiresAt < time.Now().Unix() || user.Session.IsAborted {
-			log.Println("Session expired")
+			utils.LogIfDevelopment("Session expired")
 			return utils.WriteUnauthorizedError(c)
 		}
 
