@@ -8,6 +8,8 @@ RUN npm install
 
 COPY frontend/ ./
 
+ENV VITE_API_URL=/api
+
 RUN npm run build
 
 FROM golang:1.23.5 AS backend-builder
