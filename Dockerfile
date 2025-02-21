@@ -9,6 +9,7 @@ RUN npm install
 COPY frontend/ ./
 
 ENV VITE_API_URL=/api
+ENV VITE_API_GAME_URL=/api/game/join
 
 RUN npm run build
 

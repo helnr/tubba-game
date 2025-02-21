@@ -56,8 +56,9 @@ export default function Game() {
 		opponents = [];
 	}
 
+	const apiURL = import.meta.env.VITE_API_GAME_URL;
 	const { sendJsonMessage, lastMessage } = useWebSocket(
-		`ws://localhost:8080/api/game/join/${game.id}`,
+		`${apiURL}/${game.id}`,
 		{
 			share: true,
 			shouldReconnect: () => {
